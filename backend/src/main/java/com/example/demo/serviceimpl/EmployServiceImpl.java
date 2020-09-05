@@ -27,4 +27,7 @@ public class EmployServiceImpl implements EmployService {
     }
     public List<CompleteResumeInfo> getMyEmployees(Integer rec_id){return employDao.getMyEmployees(rec_id);}
     public List<CompleteEmployInfo> getEmpbyId(Integer userid){return employDao.getEmpbyId(userid);}
+    public List<CompleteEmployInfo> filt_employ_record(Integer userid,Integer identity,Integer accepted){
+        return employDao.filt_employ_record(userid,identity,accepted);
+    }
 }

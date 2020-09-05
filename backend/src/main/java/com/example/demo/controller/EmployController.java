@@ -42,4 +42,11 @@ public class EmployController {
     public void update_apply_info(@RequestParam("user_id")Integer user_id,@RequestParam("rec_id")Integer rec_id, @RequestParam("accepted")Integer accepted){
         employService.update_employ_info(user_id,rec_id,accepted);
     }
+
+    @CrossOrigin
+    @RequestMapping("/filt_employ_record")
+    public List<CompleteEmployInfo> filt_employ_record(@RequestParam("user_id")Integer user_id,@RequestParam("identity")Integer identity,@RequestParam("accepted")Integer accepted){
+        return employService.filt_employ_record(user_id,identity,accepted);
+    }
+
 }
