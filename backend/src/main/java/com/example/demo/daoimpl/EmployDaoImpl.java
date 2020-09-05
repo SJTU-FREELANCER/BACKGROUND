@@ -66,4 +66,12 @@ public class EmployDaoImpl implements EmployDao {
         return list1;
         //return applyRepository.getAppbyId(userid);
     }
+
+    @Override
+    public List<CompleteEmployInfo> filt_employ_record(Integer userid,Integer identity,Integer accepted){
+        if(identity == 0)
+            return getEmpbyId(userid);
+        else
+            return getEmpbyId(userid);
+    }
 }
