@@ -26,8 +26,6 @@ public class UserServiceTest extends DemoApplicationTests {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @MockBean
     private UserRepository userRepository;

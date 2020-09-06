@@ -44,8 +44,8 @@ public class EmployControllerTest extends DemoApplicationTests {
 
 
     private MockMvc mockMvc;//模拟网络请求
-    @MockBean
-//    @Autowired
+//    @MockBean
+    @Autowired
     private EmployService employService;
     @Autowired
     private WebApplicationContext context;
@@ -68,32 +68,32 @@ public class EmployControllerTest extends DemoApplicationTests {
     }
 
     //should be 5 tests
-    @Test
-    public void add_employ_info() throws Exception {
-        MvcResult result1 = mockMvc.perform(get("/add_employ_info?user_id=100&rec_id=125")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(employService, times(1)).add_employ_info(100, 125);
-    }
-
-    @Test
-    public void delete_employ_info() throws Exception {
-        MvcResult result2 = mockMvc.perform(get("/delete_employ_info?user_id=99&rec_id=96")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(employService, times(1)).delete_employ_info(99, 96);
-    }
-
-    @Test
-    public void update_employ_info() throws Exception {
-        MvcResult result3 = mockMvc.perform(get("/update_employ_info?user_id=99&rec_id=223&accepted=1")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(employService, times(1)).update_employ_info(99, 223, 1);
-    }
+//    @Test //mock模式
+//    public void add_employ_info() throws Exception {
+//        MvcResult result1 = mockMvc.perform(get("/add_employ_info?user_id=100&rec_id=125")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        verify(employService, times(1)).add_employ_info(100, 125);
+//    }
+//
+//    @Test //mock模式
+//    public void delete_employ_info() throws Exception {
+//        MvcResult result2 = mockMvc.perform(get("/delete_employ_info?user_id=99&rec_id=96")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        verify(employService, times(1)).delete_employ_info(99, 96);
+//    }
+//
+//    @Test  //mock模式
+//    public void update_employ_info() throws Exception {
+//        MvcResult result3 = mockMvc.perform(get("/update_employ_info?user_id=99&rec_id=223&accepted=1")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        verify(employService, times(1)).update_employ_info(99, 223, 1);
+//    }
 
     @Test
     public void getEmpbyId() throws Exception {
@@ -117,5 +117,16 @@ public class EmployControllerTest extends DemoApplicationTests {
         List<CompleteResumeInfo> res = om.readValue(resultContent, new TypeReference<List<CompleteResumeInfo>>() {
         });
         assertEquals(employService.getMyEmployees(1), res);
+    }
+    @Test
+    public void filt_employ_record() throws Exception {
+        MvcResult result = mockMvc.perform(get("/filt_employ_record?user_id=1&identity=0&accepted=0")
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
+        String resultContent = result.getResponse().getContentAsString();
+        List<CompleteEmployInfo> app = om.readValue(resultContent, new TypeReference<List<CompleteEmployInfo>>() {
+        });
+        assertEquals(employService.filt_employ_record(1, 0,0), app);
     }
 }

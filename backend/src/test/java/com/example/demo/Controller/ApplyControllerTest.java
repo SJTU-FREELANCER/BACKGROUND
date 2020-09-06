@@ -46,8 +46,8 @@ public class ApplyControllerTest extends DemoApplicationTests {
     }
 
     private MockMvc mockMvc;//模拟网络请求
-    @MockBean
-//    @Autowired
+//    @MockBean
+    @Autowired
     private ApplyService applyService;
     @Autowired
     private WebApplicationContext context;
@@ -56,45 +56,42 @@ public class ApplyControllerTest extends DemoApplicationTests {
 
     @Before
     public void setUp() {
-
 //        mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
         mockMvc = MockMvcBuilders.webAppContextSetup(context).addFilter(((request, response, chain) -> {
             response.setCharacterEncoding("UTF-8");
             chain.doFilter(request, response);
         })).build();
-
     }
-
     @AfterEach
     void tearDown() {
     }
+
+//    @Test //mock模式
+//    public void add_apply_info() throws Exception {
+//        MvcResult result1 = mockMvc.perform(get("/add_apply_info?user_id=100&rec_id=49")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        verify(applyService, times(1)).add_apply_info(100, 49);
+//    }
 //
-    @Test
-    public void add_apply_info() throws Exception {
-        MvcResult result1 = mockMvc.perform(get("/add_apply_info?user_id=100&rec_id=49")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(applyService, times(1)).add_apply_info(100, 49);
-    }
+//    @Test//mock模式
+//    public void delete_apply_info() throws Exception {
+//        MvcResult result2 = mockMvc.perform(get("/delete_apply_info?user_id=99&rec_id=257")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        verify(applyService, times(1)).delete_apply_info(99, 257);
+//    }
 
-    @Test
-    public void delete_apply_info() throws Exception {
-        MvcResult result2 = mockMvc.perform(get("/delete_apply_info?user_id=99&rec_id=257")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(applyService, times(1)).delete_apply_info(99, 257);
-    }
-
-    @Test
-    public void update_apply_info() throws Exception {
-        MvcResult result3 = mockMvc.perform(get("/update_apply_info?user_id=99&rec_id=223&accepted=1")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(applyService, times(1)).update_apply_info(99, 223, 1);
-    }
+//    @Test  //mock模式
+//    public void update_apply_info() throws Exception {
+//        MvcResult result3 = mockMvc.perform(get("/update_apply_info?user_id=99&rec_id=223&accepted=1")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        verify(applyService, times(1)).update_apply_info(99, 223, 1);
+//    }
 
     @Test
     public void getAppbyId() throws Exception {

@@ -60,7 +60,7 @@ public class ResumeControllerTest extends DemoApplicationTests {
     @AfterEach
     void tearDown() {
     }
-
+//
     @Test
     public void get_applicants() throws Exception {
         MvcResult result = mockMvc.perform(get("/get_applicants").contentType(MediaType.APPLICATION_JSON_VALUE))
