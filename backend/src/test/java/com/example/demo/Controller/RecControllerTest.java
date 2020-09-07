@@ -40,8 +40,8 @@ public class RecControllerTest extends DemoApplicationTests {
     @Autowired
     private WebApplicationContext context;
 
-//    @Autowired
-    @MockBean
+    @Autowired
+//    @MockBean
     private RecService recService;
 
     @MockBean
@@ -90,33 +90,33 @@ public class RecControllerTest extends DemoApplicationTests {
     }
 
 
-    @Test
-    public void update_rec() throws Exception {
-        MvcResult result1 = mockMvc.perform(get("/update_rec?rec_ID=3&user_ID=82&rec_Salary=4500-8000&rec_Location=松江&rec_TimeSchedule=-&rec_Title=服务员包吃住4500起&rec_Cate=服务员&rec_Enrolled=4&rec_Quota=5&rec_Desc=-&rec_Experience=不限&rec_Education=不限")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(recService, times(1)).update_rec(3, 82, "4500-8000", "松江", "-", "服务员包吃住4500起", "服务员", 4, 5, "-", "不限", "不限");
-    }
+//    @Test //mock模式
+//    public void update_rec() throws Exception {
+//        MvcResult result1 = mockMvc.perform(get("/update_rec?rec_ID=3&user_ID=82&rec_Salary=4500-8000&rec_Location=松江&rec_TimeSchedule=-&rec_Title=服务员包吃住4500起&rec_Cate=服务员&rec_Enrolled=4&rec_Quota=5&rec_Desc=-&rec_Experience=不限&rec_Education=不限")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        verify(recService, times(1)).update_rec(3, 82, "4500-8000", "松江", "-", "服务员包吃住4500起", "服务员", 4, 5, "-", "不限", "不限");
+//    }
+//
+//    @Test
+//    public void delete_job() throws Exception {
+//        MvcResult result1 = mockMvc.perform(get("/delete_rec?rec_id=499")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//
+//        verify(recService, times(1)).delete_rec(499);
+//    }
 
-    @Test
-    public void delete_job() throws Exception {
-        MvcResult result1 = mockMvc.perform(get("/delete_rec?rec_id=499")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        verify(recService, times(1)).delete_rec(499);
-    }
-
-    @Test
-    public void create_job() throws Exception {
-        MvcResult result1 = mockMvc.perform(get("/create_job?userid=1000&salary=4000-9000&location=上海，闵行&schedule=一周5天&title=网络客服&cate=网络/在线客服&quota=5&desc=网络/在线客服&exp=不限&edu=本科")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        verify(recService, times(1)).create_job(1000, "4000-9000", "上海，闵行", "一周5天", "网络客服", "网络/在线客服", 5, "网络/在线客服", "不限", "本科");
-    }
+//    @Test
+//    public void create_job() throws Exception {
+//        MvcResult result1 = mockMvc.perform(get("/create_job?userid=1000&salary=4000-9000&location=上海，闵行&schedule=一周5天&title=网络客服&cate=网络/在线客服&quota=5&desc=网络/在线客服&exp=不限&edu=本科")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//
+//        verify(recService, times(1)).create_job(1000, "4000-9000", "上海，闵行", "一周5天", "网络客服", "网络/在线客服", 5, "网络/在线客服", "不限", "本科");
+//    }
 
 }

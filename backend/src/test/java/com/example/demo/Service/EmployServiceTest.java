@@ -36,23 +36,23 @@ public class EmployServiceTest extends DemoApplicationTests {
     private EmployService employService;
 
     @Autowired
-//    @MockBean
+    //@MockBean
     private EmployRepository employRepository;
 
     // should be 5 tests
-//    @Test
+//    @Test//mock模式
 //    public void add_employ_info() {
 //
 //        employService.add_employ_info(100, 96);
 //        verify(employRepository, times(1)).add_employ_info(100, 96);
 //    }
-//    @Test
+//    @Test//mock模式
 //    public void delete_employ_info() {
 //        employService.delete_employ_info(99, 96);
 //        verify(employRepository, times(1)).delete_employ_info(99, 96);
 //    }
 //
-//    @Test
+//    @Test//mock模式
 //    public void update_employ_info() {
 //        employService.update_employ_info(99, 96, 0);
 //        verify(employRepository, times(1)).update_employ_info(99, 96, 0);
@@ -93,5 +93,39 @@ public class EmployServiceTest extends DemoApplicationTests {
         assertEquals(list1.size(), info1.size());
     }
 
+    @Test // 非mock模式
+    public void filt_employ_record1() {
+        List<CompleteEmployInfo> list = employService.filt_employ_record(1, 0, 0);
+        List<Object> info = employRepository.getEmpbyId(1);
+        List<CompleteEmployInfo> list1 = new ArrayList<CompleteEmployInfo>();
+        for (int i = 0; i < list.size(); i++) {
+            Object[] obj = (Object[]) info.get(i);
+            for (int j = 0; j < obj.length; j++) {
+                if (obj[j] == null) obj[j] = "-1";
+            }
 
+            CompleteEmployInfo currinfo = new CompleteEmployInfo(Integer.parseInt(obj[0].toString()), obj[1].toString(), obj[2].toString(), obj[3].toString(), obj[4].toString(), obj[5].toString(), Integer.parseInt(obj[6].toString()), Integer.parseInt(obj[7].toString()), obj[8].toString(), obj[9].toString(), obj[10].toString(), Integer.parseInt(obj[12].toString()), Integer.parseInt(obj[13].toString()));
+            list1.add(currinfo);
+        }
+        assertEquals(list1, list);
+        assertEquals(info.size(), list.size());
+    }
+
+    @Test // 非mock模式
+    public void filt_employ_record2() {
+        List<CompleteEmployInfo> list = employService.filt_employ_record(1, 1, 0);
+        List<Object> info = employRepository.getEmpbyId(1);
+        List<CompleteEmployInfo> list1 = new ArrayList<CompleteEmployInfo>();
+        for (int i = 0; i < list.size(); i++) {
+            Object[] obj = (Object[]) info.get(i);
+            for (int j = 0; j < obj.length; j++) {
+                if (obj[j] == null) obj[j] = "-1";
+            }
+
+            CompleteEmployInfo currinfo = new CompleteEmployInfo(Integer.parseInt(obj[0].toString()), obj[1].toString(), obj[2].toString(), obj[3].toString(), obj[4].toString(), obj[5].toString(), Integer.parseInt(obj[6].toString()), Integer.parseInt(obj[7].toString()), obj[8].toString(), obj[9].toString(), obj[10].toString(), Integer.parseInt(obj[12].toString()), Integer.parseInt(obj[13].toString()));
+            list1.add(currinfo);
+        }
+        assertEquals(list1, list);
+        assertEquals(info.size(), list.size());
+    }
 }

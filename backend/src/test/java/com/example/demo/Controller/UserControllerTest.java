@@ -57,8 +57,8 @@ public class UserControllerTest extends DemoApplicationTests {
     private WebApplicationContext context;
     @Autowired
     private PasswordEncoder passwordEncoder;
-//    @Autowired
-    @MockBean
+    @Autowired
+//    @MockBean
     private UserService userService;
 
 
@@ -78,57 +78,57 @@ public class UserControllerTest extends DemoApplicationTests {
     }
 
 
-    @Test
-    public void change_state() throws Exception {
-
-        MvcResult result1 = mockMvc.perform(get("/change_state?userid=20")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(userService, times(1)).change_state(20);
-    }
-
-    @Test
-    public void alter_user_info() throws Exception {
-
-        MvcResult result2 = mockMvc.perform(get("/alter_user_info?userid=2&username=Aurora Carding&password=9031ufxb&phone=92114684077&email=4495771966@598.com&role=0")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(userService, times(1)).alter_user_info(2, "Aurora Carding", "9031ufxb", "92114684077", "4495771966@598.com", 0);
-    }
-
-//    @Test
-//    public void getUserbyId() throws Exception {
-//        MvcResult result = mockMvc.perform(get("/getUserbyId?userid=3"))
-//                .andExpect(status().isOk()).andReturn();
-//        User u = new User(3, "Calla Bullivant", "6766yopc", "0955435856@831.com", 1, "76796318740");
-//        String resultContent = result.getResponse().getContentAsString();
-//        User user = om.readValue(resultContent, new TypeReference<User>() {
-//        });
-//        assertEquals(u.getUser_ID(), user.getUser_ID());
-//        assertEquals(u.getUserName(), user.getUserName());
-//        assertEquals(u.getPassword(), user.getPassword());
-//        assertEquals(u.getEmail(), user.getEmail());
-//        assertEquals(u.getRole(), user.getRole());
-//        assertEquals(u.getPhone(), user.getPhone());
-//    }//非mock模式
+//    @Test  //mock模式
+//    public void change_state() throws Exception {
 //
-//    @Test
-//    public void getUserbyUsername() throws Exception {
-//        MvcResult result = mockMvc.perform(get("/getUserbyUsername?username=Calla Bullivant"))
-//                .andExpect(status().isOk()).andReturn();
-//        User u = new User(3, "Calla Bullivant", "6766yopc", "0955435856@831.com", 1, "76796318740", passwordEncoder.encode("6766yopc"));
-//        User u2 = new User("Calla Bullivant", "6766yopc", "0955435856@831.com", 1, "76796318740");
-//        String resultContent = result.getResponse().getContentAsString();
-//        User user = om.readValue(resultContent, new TypeReference<User>() {
-//        });
-//        assertEquals(u.getUser_ID(), user.getUser_ID());
-//        assertEquals(u.getUserName(), user.getUserName());
-//        assertEquals(u.getPassword(), user.getPassword());
-//        assertEquals(u.getEmail(), user.getEmail());
-//        assertEquals(u.getRole(), user.getRole());
-//        assertEquals(u.getPhone(), user.getPhone());
-//    }//非mock模式
+//        MvcResult result1 = mockMvc.perform(get("/change_state?userid=20")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        verify(userService, times(1)).change_state(20);
+//    }
+//
+//    @Test//mock模式
+//    public void alter_user_info() throws Exception {
+//
+//        MvcResult result2 = mockMvc.perform(get("/alter_user_info?userid=2&username=Aurora Carding&password=9031ufxb&phone=92114684077&email=4495771966@598.com&role=0")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        verify(userService, times(1)).alter_user_info(2, "Aurora Carding", "9031ufxb", "92114684077", "4495771966@598.com", 0);
+//    }
+
+    @Test
+    public void getUserbyId() throws Exception {
+        MvcResult result = mockMvc.perform(get("/getUserbyId?userid=3"))
+                .andExpect(status().isOk()).andReturn();
+        User u = new User(3, "Calla Bullivant", "6766yopc", "0955435856@831.com", 1, "76796318740");
+        String resultContent = result.getResponse().getContentAsString();
+        User user = om.readValue(resultContent, new TypeReference<User>() {
+        });
+        assertEquals(u.getUser_ID(), user.getUser_ID());
+        assertEquals(u.getUserName(), user.getUserName());
+        assertEquals(u.getPassword(), user.getPassword());
+        assertEquals(u.getEmail(), user.getEmail());
+        assertEquals(u.getRole(), user.getRole());
+        assertEquals(u.getPhone(), user.getPhone());
+    }//非mock模式
+
+    @Test
+    public void getUserbyUsername() throws Exception {
+        MvcResult result = mockMvc.perform(get("/getUserbyUsername?username=Calla Bullivant"))
+                .andExpect(status().isOk()).andReturn();
+        User u = new User(3, "Calla Bullivant", "6766yopc", "0955435856@831.com", 1, "76796318740", passwordEncoder.encode("6766yopc"));
+        User u2 = new User("Calla Bullivant", "6766yopc", "0955435856@831.com", 1, "76796318740");
+        String resultContent = result.getResponse().getContentAsString();
+        User user = om.readValue(resultContent, new TypeReference<User>() {
+        });
+        assertEquals(u.getUser_ID(), user.getUser_ID());
+        assertEquals(u.getUserName(), user.getUserName());
+        assertEquals(u.getPassword(), user.getPassword());
+        assertEquals(u.getEmail(), user.getEmail());
+        assertEquals(u.getRole(), user.getRole());
+        assertEquals(u.getPhone(), user.getPhone());
+    }//非mock模式
 
 }
